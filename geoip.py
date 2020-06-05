@@ -34,10 +34,10 @@ def lambda_handler(event, context):
 	return {
 		'statusCode': 200,
 		'headers': {
-			'Content-Type': 'application/json'
-			'Cache-Control': 'no-store'
+			'Content-Type': 'application/json',
+			'Cache-Control': 'no-store',
 		},
-		'body': geoip_json(event['requestContext']['http']['sourceIp'])
+		'body': geoip_json(event['requestContext']['http']['sourceIp']),
 	}
 
 if __name__ == "__main__":
