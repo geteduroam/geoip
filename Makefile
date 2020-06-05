@@ -1,11 +1,9 @@
-testvenv:
-	test -n "$$VIRTUAL_ENV"
-	make run
+geoip: geoip.py GeoLite2-City.mmdb
+	pip install -r requirements.txt -t ./geoip/
+	cp GeoLite2-City.mmdb geoip.py geoip/
 
-pip:
-	pip install -r requirements.txt
+run: geoip
+	python geoip/geoip.py
 
-run: pip
-	python geoip.py
-
-.PHONY: testvenv pip run
+geoip.zip: geoip
+	cd geoip; rm ../geoip.zip; zip -9 -r ../geoip.zip .

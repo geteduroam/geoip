@@ -1,2 +1,4 @@
-__pycache__
 *.mmdb
+*.zip
+/geoip
+__pycache__
