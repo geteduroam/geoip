@@ -12,6 +12,7 @@ app = web.application(urls, globals())
 class geoip:
 	def GET(self):
 		web.header('Content-Type', 'application/json')
+		web.header('Cache-Control', 'no-store')
 		return geoip_json(web.ctx.ip)
 
 def geoip_json(ip):
@@ -34,6 +35,7 @@ def lambda_handler(event, context):
 		'statusCode': 200,
 		'headers': {
 			'Content-Type': 'application/json'
+			'Cache-Control': 'no-store'
 		},
 		'body': geoip_json(event['requestContext']['http']['sourceIp'])
 	}
