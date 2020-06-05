@@ -19,6 +19,8 @@ def geoip_json(ip):
 		response = reader.city(ip)
 		return json.dumps({
 			'country': response.country.iso_code,
+			'city': response.city.name,
+			'postal': response.postal.code,
 			'geo': {
 				'lat': response.location.latitude,
 				'lon': response.location.longitude,
