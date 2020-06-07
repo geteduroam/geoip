@@ -30,15 +30,5 @@ def geoip_json(ip):
 	except geoip2.errors.AddressNotFoundError as e:
 		return json.dumps({'err': str(e)})
 
-def lambda_handler(event, context):
-	return {
-		'statusCode': 200,
-		'headers': {
-			'Content-Type': 'application/json',
-			'Cache-Control': 'no-store',
-		},
-		'body': geoip_json(event['requestContext']['http']['sourceIp']),
-	}
-
 if __name__ == "__main__":
 	app.run()
