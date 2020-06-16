@@ -4,12 +4,13 @@ def lambda_handler(event, context):
 	# event['requestContext']['http']['sourceIp']
 	# event['requestContext']['identity']['sourceIp']
 	# event['headers']['X-Forwarded-For']
+	# event['headers']['x-forwarded-for']
 	e = event
 	e = e.get('headers', e)
 	e = e.get('requestContext', e)
-	e = e.get('http', e)
-	e = e.get('identity', e)
-	ip = e.get('sourceIp', None) or e.get('X-Forwarded-For', '').split(',')[0]
+	e = e.get('http', e.get('identity', e))
+	e = e.get('sourceIp', e.get('X-Forwarded-For', e.get('x-forwarded-for', '')))
+	ip = e.split(',')[0]
 
 	return {
 		'statusCode': 200,
